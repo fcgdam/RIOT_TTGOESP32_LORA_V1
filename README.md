@@ -2,11 +2,38 @@
 
 This repository contains a RIOT-OS board definition for the TTGO ESP32 board, Version 1, that has support for LORA through the SX127X transceiver and a SSD1306 OLED.
 
+The board definition is not yet totally complete. Only the following points are correctly implemented/checked:
+
+- ESP32 clock frequency: Necessary for correct serial output.
+- On board led PIN definition
+- SX1276 transceiver pin definitions
+- SSD1306 pin definitions
+- I2C pins definitions
+- SPI pins definitions
+
+Other pins are probably not corrected and where not checked yet.
+
 # What is working?
 
 The following peripheral devices work:
 
-- LORA SX1276 works
 - SSD1306 OLed
+- LORA SX1276 works
 
-Under the examples directory there are examples for each peripheral
+Under the examples directory there are examples for each peripheral:
+
+There is an example for driving the OLED.
+
+Lorawan TTN (The Things Network) connection works with RIOT Loramac example and with this repository board definition.
+
+# How to use it?
+
+The following steps are required:
+
+- Checkout the RIOT-OS repository to a local machine.
+- I recommend to install the docker RIOT-OS BUILD container: https://hub.docker.com/r/riot/riotbuild/ for building RIOT based applications
+- Checkout this repository
+- Copy this repository board definition to the boards directory of the cloned RIOT-OS repository
+- Enter the example directoy application.
+- Execute make flash term
+
