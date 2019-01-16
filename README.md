@@ -18,13 +18,9 @@ Other pins are probably not corrected and where not checked yet.
 The following peripheral devices work:
 
 - SSD1306 OLed
-- LORA SX1276 works
+- LORA SX1276 works but several issues connecting to lorawan/TTN do exist (timing issues).
 
-Under the examples directory there are examples for each peripheral:
-
-There is an example for driving the OLED.
-
-Lorawan TTN (The Things Network) connection works with RIOT Loramac example and with this repository board definition.
+Under the examples directory there are examples for each peripheral.
 
 # How to use it?
 
