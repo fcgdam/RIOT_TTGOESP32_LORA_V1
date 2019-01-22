@@ -14,6 +14,7 @@
  * @brief       Example demonstrating the use of LoRaWAN with RIOT
  *
  * @author      Alexandre Abadie <alexandre.abadie@inria.fr>
+ * @author      fcgdam <primalcortex.wordpress.com>
  *
  * @}
  */
@@ -75,35 +76,11 @@ static void _prepare_next_alarm(void)
 
 static void _send_message(void)
 {
-    uint8_t res;
-
     printf("Sending: %s\n", message);
     /* The send call blocks until done */
-    res = semtech_loramac_send(&loramac, (uint8_t *)message, strlen(message));
-
-    switch (res) {
-        case SEMTECH_LORAMAC_TX_OK:
-            puts("Lorawan TX OK.");
-            break;
-        case SEMTECH_LORAMAC_TX_ERROR:
-            puts("Lorawan TX failed.");
-            break;
-        case SEMTECH_LORAMAC_BUSY:
-            puts("Lorawan stack BUSY.");
-            break;
-        case SEMTECH_LORAMAC_NOT_JOINED:
-            puts("Lorawan stack not joined.");
-            break;
-        case SEMTECH_LORAMAC_TX_SCHEDULE:
-            puts("Lorawan stack TX scheduled.");
-            break;
-        default:
-            printf("Lorawan send result: %d\n", res);
-            break;
-    }
-
+    semtech_loramac_send(&loramac, (uint8_t *)message, strlen(message));
     /* Wait until the send cycle has completed */
-    puts("Waiting for semtech_loramac stack completion...");
+    puts("Waiting for completion...");
     semtech_loramac_recv(&loramac);
     puts("Sending done!");
 }
@@ -168,15 +145,18 @@ int main(void)
         semtech_loramac_set_appeui(&loramac, appeui);
         semtech_loramac_set_appkey(&loramac, appkey);
     } else {
-        puts("Set OBP information.");
+        puts("Set ABP information.");
         semtech_loramac_set_devaddr(&loramac, devaddr);
         semtech_loramac_set_appskey(&loramac, appskey);
         semtech_loramac_set_nwkskey(&loramac, nwkskey);
+
+        printf("Dev addr: %02X%02X%02X%02X\n", devaddr[0], devaddr[1], devaddr[2], devaddr[3] );
+        printf("App Session Key: %02X%02X%02X%02X...\n", appskey[0], appskey[1], appskey[2], appskey[3] );
+        printf("Network Session Key: %02X%02X%02X%02X...\n", nwkskey[0], nwkskey[1], nwkskey[2], nwkskey[3] );
     }
 
-    printf("devaddr: %02X%02X%02X%02X\n", devaddr[0], devaddr[1], devaddr[2], devaddr[3] );
     /* Use a fast datarate, e.g. BW125/SF7 in EU868 */
-    semtech_loramac_set_dr(&loramac, LORAMAC_DR_3);
+    semtech_loramac_set_dr(&loramac, LORAMAC_DR_1);
 
     while ( !joined ) {
         /* Start the Over-The-Air Activation (OTAA) procedure to retrieve the
