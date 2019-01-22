@@ -1,4 +1,4 @@
-TTGO SSD1301 OLED 
+TTGO SSD1306 OLED 
 =================
 
 This example contains a simple code to test the TTGO ESP32 LORA V1 board OLed screen.

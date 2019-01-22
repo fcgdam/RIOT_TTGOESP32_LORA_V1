@@ -33,14 +33,6 @@
 extern "C" {
 #endif
 
-#define SX127X_PARAM_SPI_NSS    GPIO_PIN(0,18)
-#define SX127X_PARAM_SPI_RESET  GPIO_PIN(0,14)
-#define SX127X_PARAM_DIO0       GPIO_PIN(0,26)
-#define SX127X_PARAM_DIO1       GPIO_PIN(0,33)
-#define SX127X_PARAM_DIO2       GPIO_PIN(0,32)
-#define SX127X_PARAM_DIO3       GPIO_UNDEF
-
-
 /**
  * @name    ADC and DAC channel configuration
  * @{
@@ -140,8 +132,8 @@ extern "C" {
  * be used for other purposes as long as the SPI interface is not used.
  * @{
  */
-#ifndef SPI0_DEV
-#define SPI0_DEV    VSPI    /**< VSPI is used as SPI_DEV(0) */
+#ifndef SPI0_CTRL
+#define SPI0_CTRL   VSPI    /**< VSPI is used as SPI_DEV(0) */
 #endif
 #ifndef SPI0_SCK
 #define SPI0_SCK    GPIO5   /**< VSPI SCK */

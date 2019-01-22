@@ -80,6 +80,32 @@
 /** @} */
 #define OLED_I2C_ADDR    0x3C
 
+/**
+ * @name    sx1276 (on-board) pins
+ *
+ * TTGO V1 sx1276 Lora transceiver pins
+ * @{
+ */
+/** @} */
+//#define SX127X_PARAM_SPI        (SPI_DEV(0))
+#define SX127X_PARAM_SPI_NSS    GPIO_PIN(0,18)
+#define SX127X_PARAM_SPI_RESET  GPIO_PIN(0,14)
+#define SX127X_PARAM_DIO0       GPIO_PIN(0,26)
+#define SX127X_PARAM_DIO1       GPIO_PIN(0,33)
+#define SX127X_PARAM_DIO2       GPIO_PIN(0,32)
+#define SX127X_PARAM_DIO3       GPIO_UNDEF
+#define SX127X_PARAM_PASELECT   (SX127X_PA_RFO)
+
+#define SX127X_PARAMS   { /*.spi       = SX127X_PARAM_SPI,*/     \
+                          .nss_pin   = SX127X_PARAM_SPI_NSS, \
+                          .reset_pin = SX127X_PARAM_RESET,   \
+                          .dio0_pin  = SX127X_PARAM_DIO0,    \
+                          .dio1_pin  = SX127X_PARAM_DIO1,    \
+                          .dio2_pin  = SX127X_PARAM_DIO2,    \
+                          .dio3_pin  = SX127X_PARAM_DIO3,    \
+                          .paselect  = SX127X_PARAM_PASELECT \
+                        }
+
 /* include common board definitions as last step */
 #include "board_common.h"
 
